@@ -10,7 +10,7 @@ use App\Http\Requests\{replace}\Update{replace}Request;
 use App\Http\Requests\{replace}\Delete{replace}Request;
 use App\Transformers\{replace}Transformer;
 use App\Interfaces\{replace}Interface;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use Symfony\Component\HttpFoundation\Response;
 
 class {replace}Controller extends ApiController
