@@ -309,6 +309,6 @@ class GenerateFile implements GenerateFileInterface
             '--create' => $tableName,
         ));
         var_dump($exitCode);
-        parent::printline('ok');
+        $this->printline('ok');
     }
 }
