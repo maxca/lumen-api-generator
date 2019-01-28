@@ -108,7 +108,7 @@ class GenerateFile implements GenerateFileInterface
             'needDir'  => true,
         ),
         'Seeder'      => array(
-            'resource' => 'template/Seeeder.php',
+            'resource' => 'template/Seeder.php',
             'target'   => 'database/seeds/',
             'needDir'  => true,
         ),
