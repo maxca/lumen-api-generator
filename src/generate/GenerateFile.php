@@ -103,7 +103,7 @@ class GenerateFile implements GenerateFileInterface
             'needDir'  => false,
         ),
         'Test'        => array(
-            'resource' => 'template/Test.php',
+            'resource' => 'template/Tests.php',
             'target'   => 'Tests/',
             'needDir'  => true,
         ),

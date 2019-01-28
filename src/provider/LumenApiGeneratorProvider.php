@@ -1,15 +1,19 @@
 <?php
+
 namespace LumenApiGenerator\Provider;
 
 use LumenApiGenerator\Command\GenerateFileCommand;
+use Illuminate\Support\ServiceProvider;
 
-class LumenApiGeneratorProvider {
+class LumenApiGeneratorProvider extends ServiceProvider
+{
 
-    protected $command =array(
+    protected $command = array(
         GenerateFileCommand::class,
     );
 
-   public function boot() {
-       $this->commands($this->commands);
-   }
+    public function boot()
+    {
+        $this->commands($this->command);
+    }
 }

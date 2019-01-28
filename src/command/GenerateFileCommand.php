@@ -50,7 +50,7 @@ class GenerateFileCommand extends Command
         $namespace = $this->ask('What is your namespace ?');
         $this->generate = app(GenerateFile::class, ['namespace' => $namespace]);
         $this->generate->setPath(base_path());
-        $this->generate->excute();
+        $this->generate->execute();
         $this->generate->makeMigration();
 
         echo "\r\n";
