@@ -125,6 +125,10 @@ class GenerateFile implements GenerateFileInterface
         ),
     );
 
+    protected $noNeedKey = array(
+        'Model' => true,
+    );
+
     protected $needDuplicate = array(
         'Request' => 'requestType',
         'Lang'    => 'configLang',
@@ -211,10 +215,18 @@ class GenerateFile implements GenerateFileInterface
                 $property = $this->needDuplicate[$key];
                 $this->processDuplicate($key, $property, $list);
             } else {
-                $filename = $this->replace . ucfirst($key) . '.php';
+                $filename = $this->checkFilename($key);
                 $this->processReadWriteFile($filename, $list);
             }
         }
+    }
+
+    protected  function checkFilename($key)
+    {
+        if(array_key_exists($key , $this->noNeedKey)) {
+            return $this->replace . '.php';
+        }
+        $this->replace . ucfirst($key) . '.php';
     }
 
 

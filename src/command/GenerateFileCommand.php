@@ -51,9 +51,10 @@ class GenerateFileCommand extends Command
         $this->generate = app(GenerateFile::class, ['namespace' => $namespace]);
         $this->generate->setPath(base_path());
         $this->generate->execute();
-       # $this->generate->makeMigration();
+        $this->generate->makeMigration();
 
         echo "\r\n";
+
         dump('#########################################');
         dump('generate module ' . $namespace . ' success !');
 
