@@ -2,8 +2,9 @@
 
 $router->group(
     array(
-        'prefix' => 'units',
-        'middleware' => array('locale','jwt.auth')
+        'prefix' => '{replace}',
+        'middleware' => array('locale','jwt.auth'),
+        'namespace' => 'V1\{replace}',
     ),
     function () use ($router) {
         $router->get('/', array('uses' => '{replace}Controller@index'));
