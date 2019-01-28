@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V1\{replace};
+namespace App\Http\Controllers\API\V1\{replace};
 
 use App\Models\{replace};
 use App\Http\Requests\{replace}\Index{replace}Request;

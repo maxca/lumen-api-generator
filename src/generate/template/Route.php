@@ -4,7 +4,7 @@ $router->group(
     array(
         'prefix' => 'v1/{replace_sm}',
         'middleware' => array('locale','auth'),
-        'namespace' => 'V1\{replace}',
+        'namespace' => 'API\V1\{replace}',
     ),
     function () use ($router) {
         $router->get('/', array('uses' => '{replace}Controller@index'));

@@ -79,7 +79,7 @@ class GenerateFile implements GenerateFileInterface
         ),
         'Controller'  => array(
             'resource' => 'template/Controller.php',
-            'target'   => 'app/Http/Controllers/v1/',
+            'target'   => 'app/Http/Controllers/API/V1/',
             'needDir'  => true,
         ),
         'Model'       => array(
@@ -90,7 +90,12 @@ class GenerateFile implements GenerateFileInterface
         'Repository'  => array(
             'resource' => 'template/Repository.php',
             'target'   => 'app/Repositories/',
-            'needDir'  => false,
+            'needDir'  => true,
+        ),
+        'Interface'  => array(
+            'resource' => 'template/Interface.php',
+            'target'   => 'app/Repositories/',
+            'needDir'  => true,
         ),
         'Route'       => array(
             'resource' => 'template/Route.php',
@@ -304,11 +309,12 @@ class GenerateFile implements GenerateFileInterface
     {
         $tableName = $this->replaceSmall;
         $call      = 'create_table_' . $tableName;
+        $this->printLine('run migration file');
         $exitCode  = Artisan::call('make:migration', array(
             'name'     => $call,
             '--create' => $tableName,
         ));
-        var_dump($exitCode);
+
         $this->printline('ok');
     }
 }
