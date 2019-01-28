@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories\{replace};
+namespace App\Interfaces;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\{replace};
@@ -8,7 +8,7 @@ use App\Models\{replace};
  * Interface DemoInterface
  * @package App\Repositories\{replace}
  */
-interface DemoInterface {
+interface {replace}Interface {
 
 
     /**

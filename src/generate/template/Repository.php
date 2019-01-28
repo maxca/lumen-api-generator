@@ -2,15 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Contracts\BaseRepository;
+use App\Contracts\BaseRepository\{replace};
 use App\Models\{replace};
 use App\Exceptions\GeneralException;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Interfaces\{replace}Interface;
 
 /**
  * Class {replace}Repository.
  */
-class {replace}Repository extends BaseRepository
+class {replace}Repository extends BaseRepository implements replace{Interface}
 {
     /**
      * @return string

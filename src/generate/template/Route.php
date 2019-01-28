@@ -3,7 +3,7 @@
 $router->group(
     array(
         'prefix' => 'v1/{replace_sm}',
-        'middleware' => array('locale','auth'),
+        'middleware' => array('jwt.auth'),
         'namespace' => 'API\V1\{replace}',
     ),
     function () use ($router) {
