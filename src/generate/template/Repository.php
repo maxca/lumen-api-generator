@@ -11,7 +11,7 @@ use App\Interfaces\{replace}Interface;
 /**
  * Class {replace}Repository.
  */
-class {replace}Repository extends BaseRepository implements replace{Interface}
+class {replace}Repository extends BaseRepository implements {replace}Interface
 {
     /**
      * @return string
