@@ -226,7 +226,7 @@ class GenerateFile implements GenerateFileInterface
         if(array_key_exists($key , $this->noNeedKey)) {
             return $this->replace . '.php';
         }
-        $this->replace . ucfirst($key) . '.php';
+        return $this->replace . ucfirst($key) . '.php';
     }
 
 
@@ -263,15 +263,14 @@ class GenerateFile implements GenerateFileInterface
         $newFile = $this->readAndReplaceFile($list['resource']);
 
         if ($list['needDir'] === true) {
-            $path = $this->path . '/' . $list['target'] . '/' . $this->replace;
+            $path = $this->path . $list['target']  . $this->replace;
         } else {
-            $path = $this->path . '/' . $list['target'] . '/';
+            $path = $this->path  . $list['target'];
         }
 
         if (!is_dir($path)) {
             mkdir($path, 0777, true);
         }
-
 
         $fullPath = $path . '/' . $filename;
         file_put_contents($fullPath, $newFile);
