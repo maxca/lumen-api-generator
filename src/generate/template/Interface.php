@@ -1,33 +1,14 @@
 <?php
+
 namespace App\Interfaces;
 
-use Illuminate\Pagination\LengthAwarePaginator;
-use App\Models\{replace};
+use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface DemoInterface
- * @package App\Repositories\{replace}
+ * Interface {replace}Repository
+ * @package namespace App\Interfaces;
  */
-interface {replace}Interface {
-
-
-    /**
-     * @return mixed
-     */
-    public function model();
-
-    /**
-     * @return mixed
-     */
-    public function getAll($filters =[], $page = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator;
-
-    /**
-     * @return mixed
-     */
-    public function findById($id);
-
-    /**
-     * @return mixed
-     */
-    public function create(array $data) : {replace};
+interface {replace}Repository extends RepositoryInterface
+{
+    public function deleteAndDetach($id, $relation);
 }

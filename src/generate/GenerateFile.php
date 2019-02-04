@@ -87,15 +87,15 @@ class GenerateFile implements GenerateFileInterface
             'target'   => 'app/Models/',
             'needDir'  => false,
         ),
-        'Repository'  => array(
+        'RepositoryEloquent'  => array(
             'resource' => 'template/Repository.php',
             'target'   => 'app/Repositories/',
             'needDir'  => true,
         ),
-        'Interface'  => array(
+        'Repository'  => array(
             'resource' => 'template/Interface.php',
-            'target'   => 'app/Repositories/',
-            'needDir'  => true,
+            'target'   => 'app/Interfaces/',
+            'needDir'  => false,
         ),
         'Route'       => array(
             'resource' => 'template/Route.php',
@@ -123,6 +123,10 @@ class GenerateFile implements GenerateFileInterface
             'needDir'  => true,
             'lang'     => true,
         ),
+    );
+
+    protected $noNeedKey = array(
+        'Model' => true,
     );
 
     protected $needDuplicate = array(
@@ -210,12 +214,20 @@ class GenerateFile implements GenerateFileInterface
                 $property = $this->needDuplicate[$key];
                 $this->processDuplicate($key, $property, $list);
             } else {
-                $filename = $this->replace . ucfirst($key) . '.php';
+                $filename = $this->checkFilename($key);
+//                $filename = $this->replace . ucfirst($key) . '.php';
                 $this->processReadWriteFile($filename, $list);
             }
         }
     }
 
+    protected  function checkFilename($key)
+    {
+        if(array_key_exists($key , $this->noNeedKey)) {
+            return $this->replace . '.php';
+        }
+        return $this->replace . ucfirst($key) . '.php';
+    }
 
     protected function processDuplicate($key, $property, $list)
     {

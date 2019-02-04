@@ -1,19 +1,27 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\{replace};
 
-use App\Contracts\BaseRepository\{replace};
+use App\Contracts\Repository;
+use App\Criterias\RequestCriteria;
+use App\Interfaces\{replace}Repository;
 use App\Models\{replace};
-use App\Exceptions\GeneralException;
-use Illuminate\Pagination\LengthAwarePaginator;
-use App\Interfaces\{replace}Interface;
 
 /**
- * Class {replace}Repository.
+ * Class {replace}RepositoryEloquent
+ * @package namespace App\Repositories;
  */
-class {replace}Repository extends BaseRepository implements {replace}Interface
+class {replace}RepositoryEloquent extends Repository implements {replace}Repository
 {
     /**
+     * Set column for searching.
+     */
+    protected $fieldSearchable = [
+    ];
+
+    /**
+     * Specify Model class name
+     *
      * @return string
      */
     public function model()
@@ -21,84 +29,12 @@ class {replace}Repository extends BaseRepository implements {replace}Interface
         return {replace}::class;
     }
 
-    /**
-     * @param int    $page
-     * @param string $orderBy
-     * @param string $sort
-     *
-     * @return mixed
-     */
-    public function getAll($filters =[], $page = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
-    {
-        ${replace_sm} = $this->model->orderBy($orderBy, $sort);
-
-        if (isset($filters['name'])) {
-
-            ${replace_sm}->where('name' ,'like', '%'. $filters['name'].'%');
-        }
-
-        $result = ${replace_sm}->paginate($page);
-
-        return $result;
-
-
-    }
 
     /**
-     * @param int    $id
-     *
-     * @return mixed
+     * Boot up the repository, pushing criteria
      */
-    public function findById($id)
+    public function boot()
     {
-        return $this->model
-            ->find($id);
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return {replace}
-     * @throws \Exception
-     * @throws \Throwable
-     */
-    public function create(array $data) : {replace}
-    {
-        return  $this->model->create([
-            'name' => $data['name'],
-        ]);
-    }
-
-    /**
-     * @param {replace}  ${replace}
-     * @param array $data
-     *
-     * @return {replace}
-     * @throws GeneralException
-     * @throws \Exception
-     * @throws \Throwable
-     */
-    public function update($model, array $data) : {replace}
-    {
-        if ($model) {
-            $model->update($data);
-        }
-        return $model;
-    }
-
-    /**
-     * @param  $id
-     *
-     * @return {replace}
-     * @throws GeneralException
-     * @throws \Exception
-     * @throws \Throwable
-     */
-    public function destroy($model)
-    {
-        if ($model) {
-            $model->delete();
-        }
-        return $model;
+        $this->pushCriteria(app(RequestCriteria::class));
     }
 }

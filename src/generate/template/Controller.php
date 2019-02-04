@@ -57,7 +57,7 @@ class {replace}Controller extends ApiController
 
         ${replace_sm}s = $this->{replace_sm}Repository->getAll($filters);
 
-        return $this->respondWithCollection(${replace_sm}s, $this->{replace_sm}Transformer);
+        return $this->respondWithCustomCollection(${replace_sm}s, $this->{replace_sm}Transformer);
     }
 
     /**
@@ -74,7 +74,7 @@ class {replace}Controller extends ApiController
             return $this->sendNotFoundResponse("The {replace_sm} with id {$id} doesn't exist");
         }
 
-        return $this->respondWithItem(${replace_sm}, $this->{replace_sm}Transformer);
+        return $this->respondWithCustomItem(${replace_sm}, $this->{replace_sm}Transformer);
     }
 
     /**
@@ -92,7 +92,7 @@ class {replace}Controller extends ApiController
             return $this->sendCustomResponse(Response::HTTP_EXPECTATION_FAILED, 'Error occurred on creating {replace}');
         }
 
-        return $this->setStatusCode(201)->respondWithItem(${replace_sm}, $this->{replace_sm}Transformer);
+        return $this->setStatusCode(201)->respondWithCustomItem(${replace_sm}, $this->{replace_sm}Transformer);
     }
 
     /**
@@ -113,7 +113,7 @@ class {replace}Controller extends ApiController
 
         ${replace_sm} = $this->{replace_sm}Repository->update(${replace_sm}, $request->all());
 
-        return $this->respondWithItem(${replace_sm}, $this->{replace_sm}Transformer);
+        return $this->respondWithCustomItem(${replace_sm}, $this->{replace_sm}Transformer);
     }
 
     /**
