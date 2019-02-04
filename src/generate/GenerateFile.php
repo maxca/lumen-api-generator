@@ -336,6 +336,5 @@ class GenerateFile implements GenerateFileInterface
             $data .= "require_once base_path('routes/{$this->replace}/{$this->replace}Route.php');";
             file_put_contents(base_path("routes/{$path}.php"), $data . "\r\n", FILE_APPEND);
         }
-        $this->writeViewBlade();
     }
 }
