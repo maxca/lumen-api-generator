@@ -72,52 +72,52 @@ class GenerateFile implements GenerateFileInterface
      */
     protected $configPath = array(
 
-        'Request'     => array(
+        'Request'            => array(
             'resource' => 'template/Request.php',
             'target'   => 'app/Http/Requests/',
             'needDir'  => true,
         ),
-        'Controller'  => array(
+        'Controller'         => array(
             'resource' => 'template/Controller.php',
             'target'   => 'app/Http/Controllers/API/V1/',
             'needDir'  => true,
         ),
-        'Model'       => array(
+        'Model'              => array(
             'resource' => 'template/Model.php',
             'target'   => 'app/Models/',
             'needDir'  => false,
         ),
-        'RepositoryEloquent'  => array(
+        'RepositoryEloquent' => array(
             'resource' => 'template/Repository.php',
             'target'   => 'app/Repositories/',
             'needDir'  => true,
         ),
-        'Repository'  => array(
+        'Repository'         => array(
             'resource' => 'template/Interface.php',
             'target'   => 'app/Interfaces/',
             'needDir'  => false,
         ),
-        'Route'       => array(
+        'Route'              => array(
             'resource' => 'template/Route.php',
             'target'   => 'Routes/',
             'needDir'  => true,
         ),
-        'Transformer' => array(
+        'Transformer'        => array(
             'resource' => 'template/Transformer.php',
             'target'   => 'app/Transformers/',
             'needDir'  => false,
         ),
-        'Test'        => array(
+        'Test'               => array(
             'resource' => 'template/Tests.php',
             'target'   => 'Tests/',
             'needDir'  => true,
         ),
-        'Seeder'      => array(
+        'Seeder'             => array(
             'resource' => 'template/Seeder.php',
             'target'   => 'database/seeds/',
             'needDir'  => true,
         ),
-        'Lang'        => array(
+        'Lang'               => array(
             'resource' => 'template/Lang.php',
             'target'   => 'resources/lang/',
             'needDir'  => true,
@@ -221,9 +221,9 @@ class GenerateFile implements GenerateFileInterface
         }
     }
 
-    protected  function checkFilename($key)
+    protected function checkFilename($key)
     {
-        if(array_key_exists($key , $this->noNeedKey)) {
+        if (array_key_exists($key, $this->noNeedKey)) {
             return $this->replace . '.php';
         }
         return $this->replace . ucfirst($key) . '.php';
@@ -320,7 +320,7 @@ class GenerateFile implements GenerateFileInterface
         $tableName = $this->replaceSmall;
         $call      = 'create_table_' . $tableName;
         $this->printLine('run migration file');
-        $exitCode  = Artisan::call('make:migration', array(
+        $exitCode = Artisan::call('make:migration', array(
             'name'     => $call,
             '--create' => $tableName,
         ));
@@ -328,9 +328,9 @@ class GenerateFile implements GenerateFileInterface
         $this->printline('ok');
     }
 
-    public function appendRoute($path ='api')
+    public function appendRoute($path = 'api')
     {
-        if (file_exists(base_path('routes/{$path}.php'))) {
+        if (file_exists(base_path("routes/{$path}.php"))) {
             $data = "\r\n";
             $data .= "# {$this->replace} \r\n";
             $data .= "require_once base_path('routes/{$this->replace}/{$this->replace}Route.php');";
