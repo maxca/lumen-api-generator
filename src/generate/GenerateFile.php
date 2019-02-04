@@ -327,4 +327,15 @@ class GenerateFile implements GenerateFileInterface
 
         $this->printline('ok');
     }
+
+    public function appendRoute($path ='api')
+    {
+        if (file_exists(base_path('routes/{$path}.php'))) {
+            $data = "\r\n";
+            $data .= "# {$this->replace} \r\n";
+            $data .= "require_once base_path('routes/{$this->replace}/{$this->replace}Route.php');";
+            file_put_contents(base_path("routes/{$path}.php"), $data . "\r\n", FILE_APPEND);
+        }
+        $this->writeViewBlade();
+    }
 }

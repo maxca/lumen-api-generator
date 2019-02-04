@@ -54,6 +54,9 @@ class GenerateFileCommand extends Command
         $this->generate->makeMigration();
 
         echo "\r\n";
+        dump("append route file");
+        $this->appendRoute();
+        echo "\r\n";
         dump('#########################################');
         dump('generate module ' . $namespace . ' success !');
 
