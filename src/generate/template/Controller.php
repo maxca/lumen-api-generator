@@ -9,7 +9,7 @@ use App\Http\Requests\{replace}\Show{replace}Request;
 use App\Http\Requests\{replace}\Update{replace}Request;
 use App\Http\Requests\{replace}\Delete{replace}Request;
 use App\Transformers\{replace}Transformer;
-use App\Interfaces\{replace}Interface;
+use App\Interfaces\{replace}Repository;
 use App\Http\Controllers\ApiController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,7 +34,7 @@ class {replace}Controller extends ApiController
      * @param {replace}Repository ${replace_sm}Repository
      * @param {replace}Transformer ${replace_sm}Transformer
      */
-    public function __construct({replace}Interface ${replace_sm}Repository, {replace}Transformer ${replace_sm}Transformer)
+    public function __construct({replace}Repository ${replace_sm}Repository, {replace}Transformer ${replace_sm}Transformer)
     {
         $this->{replace_sm}Repository  = ${replace_sm}Repository;
         $this->{replace_sm}Transformer = ${replace_sm}Transformer;
