@@ -34,14 +34,14 @@ class {replace}Test extends BaseTestCase
 
     public function testUpdate{replace}Success()
     {
-        ${replace}     = factory({replace}::class)->create();
-        $response = $this->put('/api/v1/{replace_sm}s/' . ${replace}->id, ${replace}->toArray())->getContent();
+        ${replace_sm}     = factory({replace}::class)->create();
+        $response = $this->put('/api/v1/{replace_sm}s/' . ${replace_sm}->id, ${replace_sm}->toArray())->getContent();
         $this->assertJson($response);
     }
 
     public function testDelete{replace}Success()
     {
-        ${replace}     = factory({replace}::class)->create();
-        $response = $this->delete('/api/v1/{replace_sm}s/' . ${replace}->id);
+        ${replace_sm}     = factory({replace}::class)->create();
+        $response = $this->delete('/api/v1/{replace_sm}s/' . ${replace_sm}->id);
     }
 }

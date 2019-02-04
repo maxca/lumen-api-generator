@@ -107,6 +107,11 @@ class GenerateFile implements GenerateFileInterface
             'target'   => 'app/Transformers/',
             'needDir'  => false,
         ),
+        'Factory'        => array(
+            'resource' => 'template/Factory.php',
+            'target'   => 'database/factories/',
+            'needDir'  => false,
+        ),
         'Test'               => array(
             'resource' => 'template/Tests.php',
             'target'   => 'Tests/',
@@ -333,7 +338,7 @@ class GenerateFile implements GenerateFileInterface
         if (file_exists(base_path("routes/{$path}.php"))) {
             $data = "\r\n";
             $data .= "# {$this->replace} \r\n";
-            $data .= "require_once base_path('routes/{$this->replace}/{$this->replace}Route.php');";
+            $data .= "require base_path('routes/{$this->replace}/{$this->replace}Route.php');";
             file_put_contents(base_path("routes/{$path}.php"), $data . "\r\n", FILE_APPEND);
         }
     }
