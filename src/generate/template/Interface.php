@@ -10,5 +10,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface {replace}Repository extends RepositoryInterface
 {
-    public function deleteAndDetach($id, $relation);
+    
 }
