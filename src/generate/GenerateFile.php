@@ -360,7 +360,7 @@ class GenerateFile implements GenerateFileInterface
         $this->printLine('run migration file');
         $exitCode = Artisan::call('make:migration', array(
             'name'     => $call,
-            '--create' => $tableName,
+            '--create' => $tableName.'s',
         ));
         $this->printline('ok');
     }

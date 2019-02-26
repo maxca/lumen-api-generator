@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V1\{replace};
+namespace App\Http\Controllers\V1;
 
 use App\Models\{replace};
 use App\Http\Requests\{replace}\Index{replace}Request;
@@ -70,7 +70,7 @@ class {replace}Controller extends ApiController
     {
         ${replace_sm} = $this->{replace_sm}Repository->findById($id);
 
-            if (!${replace_sm} instanceof {replace}) {
+        if (!${replace_sm} instanceof {replace}) {
             return $this->sendNotFoundResponse("The {replace_sm} with id {$id} doesn't exist");
         }
 
@@ -88,7 +88,7 @@ class {replace}Controller extends ApiController
     {
         ${replace_sm} = $this->{replace_sm}Repository->create($request->all());
 
-            if (!${replace_sm} instanceof {replace}) {
+        if (!${replace_sm} instanceof {replace}) {
             return $this->sendCustomResponse(Response::HTTP_EXPECTATION_FAILED, 'Error occurred on creating {replace}');
         }
 
@@ -107,7 +107,7 @@ class {replace}Controller extends ApiController
     {
         ${replace_sm} = $this->{replace_sm}Repository->findById($id);
 
-            if (!${replace_sm} instanceof {replace}) {
+        if (!${replace_sm} instanceof {replace}) {
             return $this->sendNotFoundResponse("The {replace_sm} with id {$id} doesn't exist");
         }
 
@@ -127,7 +127,7 @@ class {replace}Controller extends ApiController
     {
         ${replace_sm} = $this->{replace_sm}Repository->findById($id);
 
-            if (!${replace_sm} instanceof {replace}) {
+        if (!${replace_sm} instanceof {replace}) {
             return $this->sendNotFoundResponse("The {replace_sm} with id {$id} doesn't exist");
         }
 
