@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\V1;
 
-use App\Models\{replace};
+use App\Criterias\RequestCriteria;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\{replace}\Index{replace}Request;
 use App\Http\Requests\{replace}\Store{replace}Request;
 use App\Http\Requests\{replace}\Show{replace}Request;
 use App\Http\Requests\{replace}\Update{replace}Request;
 use App\Http\Requests\{replace}\Delete{replace}Request;
 use App\Transformers\{replace}Transformer;
-use {repository};
-use App\Http\Controllers\ApiController;
-use Symfony\Component\HttpFoundation\Response;
+use App\Repositories\{replace}\{replace}RepositoryEloquent;
 
-class {replace}Controller extends ApiController
+class {replace}Controller extends Controller
 {
     /**
      * Instance of Repository
@@ -34,7 +33,7 @@ class {replace}Controller extends ApiController
      * @param {replace}Repository ${replace_sm}Repository
      * @param {replace}Transformer ${replace_sm}Transformer
      */
-    public function __construct({replace}Repository ${replace_sm}Repository, {replace}Transformer ${replace_sm}Transformer)
+    public function __construct({replace}RepositoryEloquent ${replace_sm}Repository, {replace}Transformer ${replace_sm}Transformer)
     {
         $this->{replace_sm}Repository  = ${replace_sm}Repository;
         $this->{replace_sm}Transformer = ${replace_sm}Transformer;
@@ -49,15 +48,11 @@ class {replace}Controller extends ApiController
      */
     public function index(Index{replace}Request $request)
     {
+        $this->{replace_sm}Repository->pushCriteria(new RequestCriteria());
 
-        $filters = [];
-        if ($request->has('name')) {
-            $filters['name'] = $request->input('name');
-        }
+        $model = $this->{replace_sm}Repository->paginate();
 
-        ${replace_sm}s = $this->{replace_sm}Repository->getAll($filters);
-
-        return $this->respondWithCustomCollection(${replace_sm}s, $this->{replace_sm}Transformer);
+        return $this->respondWithCollection($model, $this->{replace_sm}Transformer);
     }
 
     /**
@@ -68,13 +63,9 @@ class {replace}Controller extends ApiController
      */
     public function show(Show{replace}Request $request, $id)
     {
-        ${replace_sm} = $this->{replace_sm}Repository->findById($id);
+        $model = $this->{replace_sm}Repository->find($id);
 
-        if (!${replace_sm} instanceof {replace}) {
-            return $this->sendNotFoundResponse("The {replace_sm} with id {$id} doesn't exist");
-        }
-
-        return $this->respondWithCustomItem(${replace_sm}, $this->{replace_sm}Transformer);
+        return $this->respondWithItem($model, $this->{replace_sm}Transformer);
     }
 
     /**
@@ -86,13 +77,9 @@ class {replace}Controller extends ApiController
      */
     public function store(Store{replace}Request $request)
     {
-        ${replace_sm} = $this->{replace_sm}Repository->create($request->all());
+        $model = $this->{replace_sm}Repository->create($request->all());
 
-        if (!${replace_sm} instanceof {replace}) {
-            return $this->sendCustomResponse(Response::HTTP_EXPECTATION_FAILED, 'Error occurred on creating {replace}');
-        }
-
-        return $this->setStatusCode(201)->respondWithCustomItem(${replace_sm}, $this->{replace_sm}Transformer);
+        return $this->setStatusCode(201)->respondWithItem($model, $this->{replace_sm}Transformer);
     }
 
     /**
@@ -105,15 +92,9 @@ class {replace}Controller extends ApiController
      */
     public function update(Update{replace}Request $request, $id)
     {
-        ${replace_sm} = $this->{replace_sm}Repository->findById($id);
+        $model = $this->{replace_sm}Repository->update($request->all(), $id);
 
-        if (!${replace_sm} instanceof {replace}) {
-            return $this->sendNotFoundResponse("The {replace_sm} with id {$id} doesn't exist");
-        }
-
-        ${replace_sm} = $this->{replace_sm}Repository->update(${replace_sm}, $request->all());
-
-        return $this->respondWithCustomItem(${replace_sm}, $this->{replace_sm}Transformer);
+        return $this->respondWithItem($model, $this->{replace_sm}Transformer);
     }
 
     /**
@@ -125,13 +106,7 @@ class {replace}Controller extends ApiController
      */
     public function destroy(Delete{replace}Request $request, $id)
     {
-        ${replace_sm} = $this->{replace_sm}Repository->findById($id);
-
-        if (!${replace_sm} instanceof {replace}) {
-            return $this->sendNotFoundResponse("The {replace_sm} with id {$id} doesn't exist");
-        }
-
-        $this->{replace_sm}Repository->destroy(${replace_sm});
+        $this->{replace_sm}Repository->delete($id);
 
         return $this->responseDeleteSuccess();
     }
