@@ -2,7 +2,7 @@
 
 $router->group(
     array(
-        'prefix' => 'v1/{replace_sm}s',
+        'prefix' => '{replace_sm}s',
         'middleware' => array('jwt.auth'),
     ),
     function () use ($router) {
