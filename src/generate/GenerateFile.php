@@ -66,6 +66,21 @@ class GenerateFile implements GenerateFileInterface
      */
     protected $data;
 
+    /** @var string
+     * set namespace of controller
+     */
+    protected $controllerNamespace = 'App\Http\Controllers\API\V1';
+
+    /** @var string
+     * set default repository namespace
+     */
+    protected $repositoryNamespace = 'App\Interfaces';
+
+    /** @var bool
+     * set default using repository
+     */
+    protected $useRepository = true;
+
     /**
      * set config path
      * @var array
@@ -78,9 +93,10 @@ class GenerateFile implements GenerateFileInterface
             'needDir'  => true,
         ),
         'Controller'         => array(
-            'resource' => 'template/Controller.php',
-            'target'   => 'app/Http/Controllers/API/V1/',
-            'needDir'  => true,
+            'resource'  => 'template/Controller.php',
+            'target'    => 'app/Http/Controllers/API/V1/',
+            'needDir'   => true,
+            'namespace' => 'App\Http\Controllers\API\V1',
         ),
         'Model'              => array(
             'resource' => 'template/Model.php',
@@ -107,7 +123,7 @@ class GenerateFile implements GenerateFileInterface
             'target'   => 'app/Transformers/',
             'needDir'  => false,
         ),
-        'Factory'        => array(
+        'Factory'            => array(
             'resource' => 'template/Factory.php',
             'target'   => 'database/factories/',
             'needDir'  => false,
@@ -155,6 +171,12 @@ class GenerateFile implements GenerateFileInterface
     public function __construct($namespace = '')
     {
         $this->setReplaceConfig($namespace);
+
+        if (!empty(config('generate.template'))) {
+            $this->configPath = config('generate.template');
+        }
+        $this->useRepository = config('generate.using_repository');
+
     }
 
 
@@ -264,7 +286,17 @@ class GenerateFile implements GenerateFileInterface
     protected function processReadWriteFile($filename, $list)
     {
         $newFile = $this->readAndReplaceFile($list['resource']);
+        if (isset($list['namespace'])) {
+            $this->controllerNamespace = $list['namespace'];
+        } else {
+            $this->controllerNamespace = $this->controllerNamespace . '\\' . $this->replace;
+        }
+        if ($this->useRepository === true) {
+            $this->repositoryNamespace = $this->repositoryNamespace . '\\' . $this->replace . 'Repository';
+        } else {
+            $this->repositoryNamespace = 'App\Repositories\\' . $this->replace . '\\' . $this->replace . 'RepositoryEloquent as ' . $this->replace . 'Repository';
 
+        }
         if ($list['needDir'] === true) {
             $path = $this->path . '/' . $list['target'] . '/' . $this->replace;
         } else {
@@ -299,7 +331,6 @@ class GenerateFile implements GenerateFileInterface
 
     }
 
-
     protected function urlGenerate($input = '')
     {
         return str_replace("_", '-', $input);
@@ -312,7 +343,9 @@ class GenerateFile implements GenerateFileInterface
         $file = str_replace(array("{replace_sm}"), $this->replaceSmall, $file);
         $file = str_replace(array("{replace_snc}"), $this->replaceSnake, $file);
         $file = str_replace(array("{replace_url}"), $this->replaceUrl, $file);
-        $file = str_replace(array("{action}"), $this->action, $file);
+        $file = str_replace(array("{action}"), strtolower($this->action), $file);
+        $file = str_replace(array("{controller_namespace}"), $this->controllerNamespace, $file);
+        $file = str_replace(array("{repository}"), $this->repositoryNamespace, $file);
         return $file;
     }
 
@@ -329,7 +362,6 @@ class GenerateFile implements GenerateFileInterface
             'name'     => $call,
             '--create' => $tableName,
         ));
-
         $this->printline('ok');
     }
 

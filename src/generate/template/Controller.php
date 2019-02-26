@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\{replace};
+namespace {controller_namespace};
 
 use App\Models\{replace};
 use App\Http\Requests\{replace}\Index{replace}Request;
@@ -9,7 +9,7 @@ use App\Http\Requests\{replace}\Show{replace}Request;
 use App\Http\Requests\{replace}\Update{replace}Request;
 use App\Http\Requests\{replace}\Delete{replace}Request;
 use App\Transformers\{replace}Transformer;
-use App\Interfaces\{replace}Repository;
+use {repository};
 use App\Http\Controllers\ApiController;
 use Symfony\Component\HttpFoundation\Response;
 

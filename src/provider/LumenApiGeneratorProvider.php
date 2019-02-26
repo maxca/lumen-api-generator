@@ -14,6 +14,10 @@ class LumenApiGeneratorProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->publishes([
+            __DIR__.'/../config/generate.php' => config_path('generate.php'),
+        ],'config');
+
         $this->commands($this->command);
     }
 }
